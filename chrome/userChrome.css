@@ -1,0 +1,44 @@
+/* Classic Firefox Green Spinner Loader Theme */
+
+/* Hide the default SVG throbber */
+.tab-throbber[busy]::before,
+.tab-throbber[progress]::before {
+  display: none !important;
+}
+
+/* Grey connecting circle */
+.tab-throbber[busy]:not([progress]) {
+  background-image: url("images/connecting.png") !important;
+  background-size: 16px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  image-rendering: -moz-crisp-edges !important;
+}
+
+/* Classic spinning green loading image */
+.tab-throbber[progress] {
+  background-image: url("images/loading.png") !important;
+  background-size: 16px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  image-rendering: -moz-crisp-edges !important;
+}
+
+/* Dark mode fixes */
+@media (prefers-color-scheme: dark) {
+  /* Make the grey connecting circle visible in dark mode */
+  .tab-throbber[busy]:not([progress]) {
+    filter: invert(1) brightness(2) !important;
+  }
+
+  /* Boost green spinner brightness in dark mode so it pops */
+  .tab-throbber[progress] {
+    filter: brightness(1.6) saturate(1.3) !important;
+  }
+}
+
+/* Remove default fill and properties that might conflict */
+.tab-throbber {
+  fill: transparent !important;
+  opacity: 1 !important;
+}
