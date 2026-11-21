@@ -1,124 +1,50 @@
-# Classic Firefox Green Spinner
+<p align="center"><img src="chrome/images/loading.png" width="32" alt="Classic green spinner"></p>
 
-A minimal Firefox theme that replaces the modern tab loading spinner with the classic **grey connecting circle** and **green spinning loader** from old Firefox (Firefox 4–29 era).
+<h1 align="center">GreenSpin-Firefox</h1>
 
-This theme does **one thing only** — it patches the tab throbber. No other UI changes are made, making it fully compatible with all platforms including macOS.
+<p align="center">Brings back the classic grey and green tab loading spinners from Firefox 4–29.</p>
 
----
+<p align="center">
+  <img src="https://img.shields.io/badge/Firefox-userChrome.css-FF7139?style=flat-square&logo=firefoxbrowser&logoColor=white" alt="Firefox userChrome.css">
+  <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey?style=flat-square" alt="Platforms">
+  <img src="https://img.shields.io/badge/CSS-663399?style=flat-square&logo=css&logoColor=white" alt="CSS">
+</p>
+
+A small `userChrome.css` patch that replaces the modern tab throbber with the old Firefox spinners. It touches nothing else in the UI.
 
 ## What it does
 
 | State | Spinner |
-|-------|---------|
-| Connecting to server (DNS / TCP) | Grey circle |
-| Downloading page content | Classic green spinning circle |
+|---|---|
+| Connecting (DNS / TCP) | <img src="chrome/images/connecting.png" width="16" alt=""> Grey circle |
+| Loading page content | <img src="chrome/images/loading.png" width="16" alt=""> Green spinning circle |
 
-In **dark mode**, both spinners are automatically brightened so they remain visible.
+- Hides the default SVG throbber and swaps in the original animated PNGs
+- Brightens both spinners in dark mode so they stay visible
+- Two images, one stylesheet, one pref
 
----
+## Install
 
-## Manual Installation
+1. Open your profile folder: `about:support` → **Profile Folder** → **Open Folder**.
+2. Copy the `chrome` folder into it.
+3. Enable custom stylesheets: either copy `user.js` into the profile folder, or set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true` in `about:config`. If you already have a `user.js`, append this line instead of replacing it:
 
-### Step 1 — Enable userChrome.css in Firefox
+   ```js
+   user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+   ```
 
-Open Firefox and navigate to `about:config`. Search for:
+4. Restart Firefox.
 
-```
-toolkit.legacyUserProfileCustomizations.stylesheets
-```
+Profile folder locations:
 
-Set it to **`true`**. (The `user.js` file in this folder does this automatically if you copy it across.)
-
----
-
-### Step 2 — Find your Firefox Profile Folder
-
-Open `about:support` in Firefox. Under **Application Basics**, find **Profile Folder** and click **Open Folder**.
-
----
-
-### Step 3 — Copy Theme Files
-
-Copy the `chrome` folder and `user.js` from this directory into your Firefox profile folder.
-
-#### macOS
-
-```bash
-cp -R "/path/to/Classic-Loader-Theme/chrome" ~/Library/Application\ Support/Firefox/Profiles/<your-profile>/
-cp "/path/to/Classic-Loader-Theme/user.js" ~/Library/Application\ Support/Firefox/Profiles/<your-profile>/
-```
-
-Or just drag and drop the `chrome` folder and `user.js` into the profile folder opened in Step 2.
-
-#### Windows
-
-Copy the `chrome` folder and `user.js` into your profile folder. The profile folder is usually located at:
-
-```
-C:\Users\<YourName>\AppData\Roaming\Mozilla\Firefox\Profiles\<your-profile>\
-```
-
-You can also press `Win + R` and type `%APPDATA%\Mozilla\Firefox\Profiles\` to open it directly.
-
----
-
-### Step 4 — Restart Firefox
-
-Completely close Firefox and reopen it. The classic green spinner will now appear when loading tabs.
-
----
-
-## AI-Assisted Installation
-
-You can ask an AI coding agent (such as [Antigravity](https://antigravity.dev)) to install this theme for you automatically.
-
-### How to do it
-
-1. Open your AI agent terminal/CLI **inside this folder** (or tell it the path to this folder).
-2. Say: **"Install this theme into my Firefox profile"**
-
-The agent will automatically detect your Firefox profile, copy the files, and configure `user.js`.
-
----
-
-> [!WARNING]
-> ### macOS — Terminal Accessibility Permission Required
->
-> On macOS, the AI agent runs inside your Terminal. For the agent to be able to copy files into system-protected locations (like the Firefox application bundle or certain Library paths), **Terminal must have Full Disk Access**.
->
-> To grant this:
-> 1. Open **System Settings** → **Privacy & Security** → **Full Disk Access**
-> 2. Enable the toggle next to **Terminal** (or whichever terminal app you use, e.g. iTerm2)
-> 3. Restart your terminal and run the agent again
->
-> Without this, the agent will encounter `Operation not permitted` errors even with `sudo`.
-
----
+- macOS: `~/Library/Application Support/Firefox/Profiles/<profile>/`
+- Windows: `%APPDATA%\Mozilla\Firefox\Profiles\<profile>\`
+- Linux: `~/.mozilla/firefox/<profile>/`
 
 ## Uninstall
 
-Delete the `chrome` folder and `user.js` from your Firefox profile folder, then restart Firefox. Everything returns to normal.
-
-```bash
-# macOS
-rm -rf ~/Library/Application\ Support/Firefox/Profiles/<your-profile>/chrome
-rm ~/Library/Application\ Support/Firefox/Profiles/<your-profile>/user.js
-```
-
-```
-# Windows — delete these from your profile folder:
-chrome\
-user.js
-```
-
----
+Delete `chrome/` (and the `user.js` line, if you added it) from the profile folder and restart Firefox.
 
 ## Compatibility
 
-| Platform | Status |
-|----------|--------|
-| macOS | ✅ Fully working |
-| Windows | ✅ Fully working |
-| Linux | ✅ Should work |
-| Firefox ESR | ✅ Recommended |
-| Firefox Release | ✅ Works |
+Works on Firefox Release and ESR on macOS and Windows. Linux should work but is untested.
